@@ -21,14 +21,65 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 	</head>
+    <!--<header style="position: absolute;top: 50px; left: 100px; z-index:500; font-size:100px"></header>-->
+    <!--<header style="position: absolute;top: 50px; left: 100px; z-index:500; font-size:100px;background-color: rgba(0,0,0,0.5)"></header>-->
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>
-                    <h1>Slide 1</h1>
-                    When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+                    <h1>Data Science Retreat</h1>
+                    <hr>
+                    <h3>Support Vector Machines</h3>
+                    <p><i>Philipp Schmidt</i></p>
+                    <p><i>September 2017</i></p>
                 </section>
-				<section>Slide 2</section>
+                <section style="text-align: left;">
+                    <h1>test</h1>
+                    <ul>
+                        <li>a</li>
+                        <li>b</li>
+                        <li>a</li>
+                        <li>b</li>
+                    </ul>
+                    <aside class="notes">
+                        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+                    </aside>
+                </section>
+                <section style="text-align: left;">
+                    <h1>test image</h1>
+                    <img src="https://qph.ec.quoracdn.net/main-qimg-0a3e8d1f008e7e86c10efe9936ead943"  height="100" width="200">
+                </section>
+                <section style="text-align: left;">
+                    <h1>Outline for today</h1>
+                    <ul>
+                        <li>a</li>
+                        <li>b</li>
+                    </ul>
+                    <aside class="notes">
+                        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+                    </aside>
+                </section>
+				<section>
+                    Slide 2
+                    When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+                    ```python
+                    print '123'
+                    ```
+                </section>
+                <section>
+                    <pre><code data-trim data-noescape>
+                        print '123'
+                        def a(arg):
+                            pass
+                    </code></pre>
+                </section>
+                <section data-markdown>
+                    <!-- .slide: style="text-align: left;"> -->
+                    <script type="text/template">
+                        Markdown content
+                        * meh
+                    </script>
+                </section>
 			</div>
 		</div>
 
@@ -40,6 +91,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+                center: false,
 				math: {
                     mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
                     config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
