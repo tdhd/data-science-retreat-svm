@@ -20,7 +20,11 @@ class NewsgroupService(Resource):
     def post(self):
         request_body = request.get_json()
         prediction = pipeline.predict([request_body['post_text']]).reshape(-1)
-        predicted_newsgroup = label_names[np.where(prediction == 1.0)[0][0]]
+        try:
+            predicted_newsgroup = label_names[np.where(prediction == 1.0)[0][0]]
+        except:
+            predicted_newsgroup = 'unknown'
+
         return {
             'newsgroup': predicted_newsgroup
         }
