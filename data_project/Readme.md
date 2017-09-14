@@ -1,6 +1,6 @@
 # 20 Newsgroups
 
-See [sample pipeline](20_newsgroups.py) and [sample webservice](webservice.py).
+See [sample pipeline](sample_scripts/20_newsgroups.py) and [sample webservice](sample_scripts/webservice.py).
 
 To run the sample code:
 
