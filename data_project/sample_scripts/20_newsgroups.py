@@ -1,4 +1,4 @@
-import cPickle
+import _pickle as cPickle
 
 import numpy as np
 import sklearn.datasets
@@ -15,7 +15,7 @@ import sklearn.svm
 
 
 def report(results, n_top=3):
-    print '-' * 42
+    print('-' * 42)
     for i in range(1, n_top + 1):
         candidates = np.flatnonzero(results['rank_test_score'] == i)
         for candidate in candidates:
@@ -41,9 +41,9 @@ def report_top_features_by_pval(label_encoder, feature_encoder, test_labels, fea
         feature_pvals = filter(lambda entry: entry[0] <= pval_threshold, feature_pvals)
         sorted_pvals = sorted(feature_pvals, key=lambda tup: tup[0])
 
-        print 'F-Test p-Value of top features for model {}:'.format(test.target_names[class_index])
+        print('F-Test p-Value of top features for model {}:'.format(test.target_names[class_index]))
         for p_value, feature_name in sorted_pvals[:max_features]:
-            print '{} - {}'.format(feature_name, p_value)
+            print('{} - {}'.format(feature_name, p_value))
 
 
 def report_top_features_by_mi(label_encoder, feature_encoder, test_labels, feature_names, test, max_features=15):
@@ -57,9 +57,9 @@ def report_top_features_by_mi(label_encoder, feature_encoder, test_labels, featu
         )
 
         mi = sorted([(m, feature_names[idx]) for idx, m in enumerate(mi)], key=lambda tup: tup[0], reverse=True)
-        print 'Mutual Information of top features for model {}:'.format(test.target_names[class_index])
+        print('Mutual Information of top features for model {}:'.format(test.target_names[class_index]))
         for mutual_info, feature_name in mi[:max_features]:
-            print '{} - {}'.format(feature_name, mutual_info)
+            print('{} - {}'.format(feature_name, mutual_info))
 
 
 def get_train_test():
@@ -125,10 +125,10 @@ def model_selection(train, test, cv=3, test_size=0.33):
 
     report(clf.cv_results_)
 
-    print '-' * 42
-    print 'validation data classification report'
-    print '-' * 42
-    print classif_report
+    print('-' * 42)
+    print('validation data classification report')
+    print('-' * 42)
+    print(classif_report)
 
     predictions_test = best_pipeline.predict(test.data)
     classif_report = sklearn.metrics.classification_report(
@@ -137,10 +137,10 @@ def model_selection(train, test, cv=3, test_size=0.33):
         target_names=test.target_names
     )
 
-    print '-' * 42
-    print 'test data classification report'
-    print '-' * 42
-    print classif_report
+    print('-' * 42)
+    print('test data classification report')
+    print('-' * 42)
+    print(classif_report)
 
     # feature index -> feature name
     feature_names = {v: k for k, v in best_tfidf.vocabulary_.iteritems()}
@@ -152,8 +152,8 @@ def model_selection(train, test, cv=3, test_size=0.33):
         for idx, feature_weight in enumerate(model):
             model_coefs.append((feature_names[idx], feature_weight))
         model_coefs_sorted = sorted(model_coefs, key=lambda tup: tup[1])
-        print model_name
-        print model_coefs_sorted[:k] + model_coefs_sorted[-k:]
+        print(model_name)
+        print(model_coefs_sorted[:k] + model_coefs_sorted[-k:])
 
     # report_top_features_by_mi(label_encoder, best_tfidf, label_encoder.transform(test.target), feature_names, test)
     report_top_features_by_pval(label_encoder, best_tfidf, label_encoder.transform(test.target), feature_names, test)
@@ -171,9 +171,9 @@ if __name__ == "__main__":
     )
 
     # persistence
-    print
-    print 'saving model and encoder...'
+    print()
+    print('saving model and encoder...')
     sklearn.externals.joblib.dump(best_pipeline, 'pipeline.pkl')
     sklearn.externals.joblib.dump(label_encoder, 'label_encoder.pkl')
     cPickle.dump(train.target_names, open('train_target_names.pkl', 'w'))
-    print 'done.'
+    print('done.')
