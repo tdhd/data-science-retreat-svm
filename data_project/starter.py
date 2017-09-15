@@ -1,8 +1,9 @@
 import sklearn.datasets
-import sklearn.multiclass
-import sklearn.svm
 import sklearn.feature_extraction.text
 import sklearn.metrics
+import sklearn.multiclass
+import sklearn.svm
+
 
 def get_train_test():
     train = sklearn.datasets.fetch_20newsgroups(subset='train', remove=('headers'))
