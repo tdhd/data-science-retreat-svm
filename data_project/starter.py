@@ -41,3 +41,10 @@ classif_report = sklearn.metrics.classification_report(
 
 print("Test-data classification report")
 print(classif_report)
+
+test_acc = sklearn.metrics.accuracy_score(
+    label_encoder.transform(test.target),
+    clf.predict(vectorizer.transform(test.data))
+)
+
+print("Test-data overall accuracy", test_acc)
