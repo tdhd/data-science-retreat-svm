@@ -1,4 +1,4 @@
-import _pickle as cPickle
+import six; from six.moves import cPickle
 
 import numpy as np
 import sklearn.datasets
@@ -13,6 +13,9 @@ import sklearn.pipeline
 import sklearn.preprocessing
 import sklearn.svm
 
+import sys
+
+is_python_3 = sys.version_info[0] >= 3
 
 def report(results, n_top=3):
     print('-' * 42)
@@ -143,11 +146,14 @@ def model_selection(train, test, cv=3, test_size=0.33):
     print(classif_report)
 
     # feature index -> feature name
-    feature_names = {v: k for k, v in best_tfidf.vocabulary_.iteritems()}
+    if is_python_3:
+        feature_names = {v: k for k, v in best_tfidf.vocabulary_.items()}
+    else:
+        feature_names = {v: k for k, v in best_tfidf.vocabulary_.iteritems()}
 
     # bottom k and top k feature weights per model
     k = 2
-    for model, model_name in zip(best_clf.coef_, test.target_names)[0:]:
+    for model, model_name in zip(best_clf.coef_, test.target_names):
         model_coefs = []
         for idx, feature_weight in enumerate(model):
             model_coefs.append((feature_names[idx], feature_weight))
@@ -166,7 +172,7 @@ if __name__ == "__main__":
     best_pipeline, label_encoder = model_selection(
         train,
         test,
-        cv=3,
+        cv=2,
         test_size=0.33
     )
 
@@ -175,5 +181,5 @@ if __name__ == "__main__":
     print('saving model and encoder...')
     sklearn.externals.joblib.dump(best_pipeline, 'pipeline.pkl')
     sklearn.externals.joblib.dump(label_encoder, 'label_encoder.pkl')
-    cPickle.dump(train.target_names, open('train_target_names.pkl', 'w'))
+    cPickle.dump(train.target_names, open('train_target_names.pkl', 'wb'))
     print('done.')

@@ -1,4 +1,4 @@
-import _pickle as cPickle
+import six; from six.moves import cPickle
 
 import numpy as np
 import sklearn.externals.joblib
@@ -13,7 +13,7 @@ api = Api(app)
 
 pipeline = sklearn.externals.joblib.load('pipeline.pkl')
 label_encoder = sklearn.externals.joblib.load('label_encoder.pkl')
-label_names = cPickle.load(open('train_target_names.pkl'))
+label_names = cPickle.load(open('train_target_names.pkl', 'rb'))
 
 
 class NewsgroupService(Resource):
