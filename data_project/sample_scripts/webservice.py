@@ -18,15 +18,18 @@ label_names = cPickle.load(open('train_target_names.pkl', 'rb'))
 
 class NewsgroupService(Resource):
     def post(self):
-        request_body = request.get_json()
-        prediction = pipeline.predict([request_body['post_text']]).reshape(-1)
+        text = request.get_json()['post_text']
+        probas = pipeline.predict_proba([text])
+        labels_with_probas = [{'name': n, 'proba': p} for (p, n) in zip(probas[0], label_names)]
+        prediction = pipeline.predict([text]).reshape(-1)
         try:
             predicted_newsgroup = label_names[np.where(prediction == 1.0)[0][0]]
         except:
             predicted_newsgroup = 'unknown'
 
         return {
-            'newsgroup': predicted_newsgroup
+            'predicted_newsgroup': predicted_newsgroup,
+            'labels_with_probas': labels_with_probas
         }
 
 

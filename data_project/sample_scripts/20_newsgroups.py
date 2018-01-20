@@ -82,11 +82,13 @@ def model_selection(train, test, cv=3, test_size=0.33):
     pipeline = sklearn.pipeline.Pipeline(
         [
             ('vectorizer', sklearn.feature_extraction.text.TfidfVectorizer(stop_words='english')),
-            ('clf', sklearn.multiclass.OneVsRestClassifier(sklearn.svm.LinearSVC()))
+            #('clf', sklearn.multiclass.OneVsRestClassifier(sklearn.svm.LinearSVC()))
+            ('clf', sklearn.multiclass.OneVsRestClassifier(sklearn.linear_model.LogisticRegression()))
         ]
     )
 
     parameters = {
+        # 'clf__C': [1e-1, 1e0, 1e1],
         'clf__estimator__C': [1e-1, 1e0, 1e1],
         # 'clf__estimator__dual': [False],
         # 'clf__estimator__loss': ['hinge'],
