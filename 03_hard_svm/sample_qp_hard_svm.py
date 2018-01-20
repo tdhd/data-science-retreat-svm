@@ -11,7 +11,6 @@ class QPHardSVM(object):
         Learns parameter vector self.theta from data X and binary labels y.
 
         y should have -1 for negative class and +1 for positive.
-        X will be augmented with an intercept term in case self.fit_intercept is True.
 
         ---
 
@@ -22,13 +21,13 @@ class QPHardSVM(object):
                         A*x = b.
         Input arguments.
 
-            P is a n x n dense or sparse 'd' matrix with the lower triangular
+            P is a d x d dense or sparse 'd' matrix with the lower triangular
             part of P stored in the lower triangle.  Must be positive
             semidefinite.
-            q is an n x 1 dense 'd' matrix.
-            G is an m x n dense or sparse 'd' matrix.
-            h is an m x 1 dense 'd' matrix.
-            A is a p x n dense or sparse 'd' matrix.
+            q is an d x 1 dense 'd' matrix.
+            G is an n x d dense or sparse 'd' matrix.
+            h is an n x 1 dense 'd' matrix.
+            A is a p x d dense or sparse 'd' matrix.
             b is a p x 1 dense 'd' matrix or None.
         """
         assert X.shape[0] == y.shape[0]
@@ -43,7 +42,7 @@ class QPHardSVM(object):
         G = -y.reshape(-1,1)*X
         h = -numpy.ones((X.shape[0], 1))
 
-        print P.shape, q.shape, G.shape, h.shape
+        print(P.shape, q.shape, G.shape, h.shape)
 
         sol = cvxopt.solvers.qp(
             # n x n
@@ -56,3 +55,4 @@ class QPHardSVM(object):
             h=cvxopt.matrix(h)
         )
         self.theta = sol['x']
+

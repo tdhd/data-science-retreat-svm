@@ -31,3 +31,4 @@ class Perceptron(object):
                     parameter_gradient = -yy * x.reshape(-1, 1)
                     self.theta = self.theta - parameter_gradient
                     theta_updated = True
+
