@@ -14,7 +14,7 @@ class Perceptron(object):
         """
         assert X.shape[0] == y.shape[0]
 
-        intercept = np.ones((X.shapvim e[0], 1))
+        intercept = np.ones((X.shape[0], 1))
         X = np.concatenate((X, intercept), axis=1)
 
         self.theta = np.random.randn(X.shape[1], 1)
