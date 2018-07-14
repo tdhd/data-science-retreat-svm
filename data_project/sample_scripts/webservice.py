@@ -12,7 +12,6 @@ api = Api(app)
 # parser.add_argument('task')
 
 pipeline = sklearn.externals.joblib.load('pipeline.pkl')
-label_encoder = sklearn.externals.joblib.load('label_encoder.pkl')
 label_names = cPickle.load(open('train_target_names.pkl', 'rb'))
 
 
@@ -21,11 +20,7 @@ class NewsgroupService(Resource):
         text = request.get_json()['post_text']
         probas = pipeline.predict_proba([text])
         labels_with_probas = [{'name': n, 'proba': p} for (p, n) in zip(probas[0], label_names)]
-        prediction = pipeline.predict([text]).reshape(-1)
-        try:
-            predicted_newsgroup = label_names[np.where(prediction == 1.0)[0][0]]
-        except:
-            predicted_newsgroup = 'unknown'
+        predicted_newsgroup = sorted(labels_with_probas, key=lambda e: e['proba'])[-1]
 
         return {
             'predicted_newsgroup': predicted_newsgroup,
@@ -37,3 +32,4 @@ api.add_resource(NewsgroupService, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)
+

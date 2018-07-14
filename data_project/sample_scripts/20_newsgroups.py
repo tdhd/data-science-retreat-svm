@@ -147,6 +147,7 @@ def model_selection(train, test, cv=3, test_size=0.33):
     print('-' * 42)
     print(classif_report)
 
+    """
     # feature index -> feature name
     if is_python_3:
         feature_names = {v: k for k, v in best_tfidf.vocabulary_.items()}
@@ -165,6 +166,7 @@ def model_selection(train, test, cv=3, test_size=0.33):
 
     # report_top_features_by_mi(label_encoder, best_tfidf, label_encoder.transform(test.target), feature_names, test)
     report_top_features_by_pval(label_encoder, best_tfidf, label_encoder.transform(test.target), feature_names, test)
+    """
 
     return best_pipeline, label_encoder
 
