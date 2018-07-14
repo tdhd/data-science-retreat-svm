@@ -184,6 +184,5 @@ if __name__ == "__main__":
     print()
     print('saving model and encoder...')
     sklearn.externals.joblib.dump(best_pipeline, 'pipeline.pkl')
-    sklearn.externals.joblib.dump(label_encoder, 'label_encoder.pkl')
     cPickle.dump(train.target_names, open('train_target_names.pkl', 'wb'))
     print('done.')
