@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.metrics import classification_report, confusion_matrix
 import pandas as pd
 
+# http://jmcauley.ucsd.edu/data/amazon/
 reader = pd.read_json('~/Downloads/reviews_Electronics_5.json.gz', lines=True, chunksize=20000)
 
 for val in reader:

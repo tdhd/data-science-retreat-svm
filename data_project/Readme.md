@@ -11,3 +11,12 @@ To run the sample code:
 To query the web service with the selected model:
 
     curl http://localhost:5000 -H "Content-Type: application/json" -d '{"post_text":"how to build a battery"}' -X POST
+
+# Amazon Product data
+
+A set of sample scripts can be found [here](amazon-product-data/), find the data that is used [here](http://jmcauley.ucsd.edu/data/amazon).
+
+# Amazon Customer Reviews Dataset
+
+See [this link](https://registry.opendata.aws/amazon-reviews) for details of the dataset. Documentation of the dataset can be found [here](https://s3.amazonaws.com/amazon-reviews-pds/readme.html).
+
