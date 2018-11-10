@@ -3,7 +3,7 @@ import pandas as pd
 # http://jmcauley.ucsd.edu/data/amazon/
 # http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Cell_Phones_and_Accessories_5.json.gz
 
-df = pd.read_json('[%s]' % ','.join(open('../reviews_Baby_5.json').readlines()))
+df = pd.read_json('~/Downloads/reviews_Baby_5.json.gz', lines=True)
 
 print(df.describe())
 
